@@ -1,0 +1,31 @@
+.sidebar {
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  width: 280px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(12px);
+  color: #e0e0e0;
+  padding: 24px 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 16px;
+}
+
+.sidebar-left {
+  left: 20px;
+}
+
+.sidebar-right {
+  right: 20px;
+}
+
+.sidebar-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 12px;
+}
