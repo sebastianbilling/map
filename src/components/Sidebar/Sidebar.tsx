@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import './Sidebar.css'
 
 interface SidebarProps {
@@ -8,10 +8,35 @@ interface SidebarProps {
 }
 
 export function Sidebar({ side, title, children }: SidebarProps) {
+  const [open, setOpen] = useState(false)
+
   return (
-    <aside className={`sidebar sidebar-${side}`}>
-      <h2 className="sidebar-title">{title}</h2>
-      {children}
-    </aside>
+    <>
+      <button
+        className={`sidebar-toggle sidebar-toggle-${side}`}
+        onClick={() => setOpen(true)}
+        aria-label={`Open ${title}`}
+      >
+        {side === 'left' ? '⚙' : '◉'}
+      </button>
+
+      {open && (
+        <div className="sidebar-backdrop" onClick={() => setOpen(false)} />
+      )}
+
+      <aside className={`sidebar sidebar-${side} ${open ? 'sidebar-open' : ''}`}>
+        <div className="sidebar-header">
+          <h2 className="sidebar-title">{title}</h2>
+          <button
+            className="sidebar-close"
+            onClick={() => setOpen(false)}
+            aria-label={`Close ${title}`}
+          >
+            ✕
+          </button>
+        </div>
+        {children}
+      </aside>
+    </>
   )
 }

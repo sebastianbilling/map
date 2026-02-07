@@ -6,10 +6,3 @@ export interface Place {
 export type LayerFilter = 'all' | 'restaurants' | 'hotels' | 'shops' | 'parks'
 
 export type DistanceUnit = 'km' | 'mi'
-
-export interface PlanePosition {
-  lon: number
-  lat: number
-  heading: number
-  timestamp: number
-}
