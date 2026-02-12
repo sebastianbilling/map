@@ -1,9 +1,9 @@
-import type { ReactNode } from 'react'
+import type { ComponentChildren } from 'preact'
 import './ui.css'
 
 interface SectionProps {
   title: string
-  children: ReactNode
+  children: ComponentChildren
 }
 
 export function Section({ title, children }: SectionProps) {

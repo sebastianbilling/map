@@ -1,7 +1,8 @@
 import 'ol/ol.css'
 import './Map.css'
 
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState } from 'preact/hooks'
+import type { ComponentChildren } from 'preact'
 import OLMap from 'ol/Map'
 import View from 'ol/View'
 import TileLayer from 'ol/layer/Tile'
@@ -10,7 +11,7 @@ import { fromLonLat } from 'ol/proj'
 import { MapProvider } from './MapContext'
 
 interface MapProps {
-  children?: ReactNode
+  children?: ComponentChildren
 }
 
 export function Map({ children }: MapProps) {

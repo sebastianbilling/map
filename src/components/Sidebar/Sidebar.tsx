@@ -1,10 +1,11 @@
-import { useState, type ReactNode } from 'react'
+import { useState } from 'preact/hooks'
+import type { ComponentChildren } from 'preact'
 import './Sidebar.css'
 
 interface SidebarProps {
   side: 'left' | 'right'
   title: string
-  children: ReactNode
+  children: ComponentChildren
 }
 
 export function Sidebar({ side, title, children }: SidebarProps) {

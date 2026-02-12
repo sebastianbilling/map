@@ -17,7 +17,7 @@ export function SliderRow({ label, min, max, value, onChange }: SliderRowProps) 
         min={min}
         max={max}
         value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
+        onChange={(e) => onChange(Number(e.currentTarget.value))}
       />
     </label>
   )

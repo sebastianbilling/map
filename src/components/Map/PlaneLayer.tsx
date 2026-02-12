@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect } from 'preact/hooks'
 import VectorLayer from 'ol/layer/Vector'
 import VectorSource from 'ol/source/Vector'
 import { fromLonLat } from 'ol/proj'
@@ -38,7 +38,6 @@ export function PlaneLayer() {
     const startTime = performance.now()
     let rafId: number
 
-    // Pre-compute styles
     const trailStyles = configs.map(cfg => {
       const styles: Style[] = []
       for (let s = 0; s < TRAIL_SAMPLES; s++) {
@@ -65,7 +64,6 @@ export function PlaneLayer() {
       })
     )
 
-    // Pre-allocate features
     const featuresPerPlane = TRAIL_SAMPLES + 1
     const allFeatures: Feature[] = []
     for (let p = 0; p < configs.length; p++) {

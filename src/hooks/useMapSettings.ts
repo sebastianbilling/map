@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'preact/hooks'
 import type { DistanceUnit, LayerFilter } from '../types'
 
 export function useMapSettings() {

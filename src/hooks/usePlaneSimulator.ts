@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo } from 'preact/hooks'
 
 const PLANE_COUNT = 100
 const BASE_LON = -0.09
