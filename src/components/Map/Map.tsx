@@ -23,17 +23,17 @@ export function Map({ children }: MapProps) {
 
     const olMap = new OLMap({
       target: containerRef.current,
-      layers: [
+      layers: [ 
         new TileLayer({
           source: new XYZ({
-            url: 'https://{a-d}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-            attributions:
-              '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+            //url: '/tiles/{z}/{x}/{y}.png',
+              url: 'https://{a-d}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',                                                                               
+      attributions: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>', 
           }),
-        }),
+        }), 
       ],
       view: new View({
-        center: fromLonLat([-0.09, 51.505]),
+        center: fromLonLat([11.97, 57.7]),
         zoom: 13,
       }),
     })

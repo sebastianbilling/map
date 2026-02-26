@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "milsymbol": "^3.0.3",
     "ol": "^10.7.0",
     "preact": "10.18.2"
   },

@@ -4,13 +4,32 @@ import VectorSource from 'ol/source/Vector'
 import { fromLonLat } from 'ol/proj'
 import { Feature } from 'ol'
 import { LineString, Point } from 'ol/geom'
-import { Stroke, Style, Circle as CircleStyle, Fill } from 'ol/style'
+import { Stroke, Style, Icon } from 'ol/style'
+import ms from 'milsymbol'
 
 import { useOLMap } from './MapContext'
 import { usePlaneConfigs, computePosition } from '../../hooks/usePlaneSimulator'
 
 const TRAIL_SECONDS = 20
 const TRAIL_SAMPLES = 20
+
+// MIL-STD-2525C SIDCs for air tracks
+const AIR_SIDCS = [
+  'SFAPMF----*****', // Friendly - Military - Fixed Wing
+  'SFAPMFM---*****', // Friendly - Military - Fighter/Bomber
+  'SFAPMH----*****', // Friendly - Military - Rotary Wing
+  'SHAPMF----*****', // Hostile - Military - Fixed Wing
+  'SHAPMFM---*****', // Hostile - Military - Fighter/Bomber
+  'SNAPMF----*****', // Neutral - Military - Fixed Wing
+  'SUAPMF----*****', // Unknown - Military - Fixed Wing
+  'SFAPMFK---*****', // Friendly - Tanker
+  'SFAPMFC---*****', // Friendly - Cargo
+  'SHAPMH----*****', // Hostile - Rotary Wing
+]
+
+function pickSidc(index: number): string {
+  return AIR_SIDCS[index % AIR_SIDCS.length]
+}
 
 function hslToRgba(h: number, s: number, l: number, a: number): string {
   const c = (1 - Math.abs(2 * l - 1)) * s
@@ -24,6 +43,20 @@ function hslToRgba(h: number, s: number, l: number, a: number): string {
   else if (h < 300) { r = x; b = c }
   else { r = c; b = x }
   return `rgba(${Math.round((r + m) * 255)},${Math.round((g + m) * 255)},${Math.round((b + m) * 255)},${a})`
+}
+
+function createMilSymbolStyle(sidc: string): Style {
+  const sym = new ms.Symbol(sidc, { size: 24 })
+  const anchor = sym.getAnchor()
+  return new Style({
+    image: new Icon({
+      src: sym.toDataURL(),
+      anchor: [anchor.x, anchor.y],
+      anchorXUnits: 'pixels',
+      anchorYUnits: 'pixels',
+      scale: 1,
+    }),
+  })
 }
 
 export function PlaneLayer() {
@@ -54,15 +87,7 @@ export function PlaneLayer() {
       return styles
     })
 
-    const markerStyles = configs.map(cfg =>
-      new Style({
-        image: new CircleStyle({
-          radius: 4,
-          fill: new Fill({ color: hslToRgba(cfg.hue, 0.9, 0.55, 1) }),
-          stroke: new Stroke({ color: '#ffffff', width: 1.5 }),
-        }),
-      })
-    )
+    const markerStyles = configs.map((_cfg, i) => createMilSymbolStyle(pickSidc(i)))
 
     const featuresPerPlane = TRAIL_SAMPLES + 1
     const allFeatures: Feature[] = []
