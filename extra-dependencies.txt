@@ -1,0 +1,14 @@
+@connectrpc/connect,2.1.1,https://www.npmjs.com/package/@connectrpc/connect/v/2.1.1
+@connectrpc/connect-web,2.1.1,https://www.npmjs.com/package/@connectrpc/connect-web/v/2.1.1
+@bufbuild/protobuf,2.11.0,https://www.npmjs.com/package/@bufbuild/protobuf/v/2.11.0
+@bufbuild/buf,1.66.0,https://www.npmjs.com/package/@bufbuild/buf/v/1.66.0
+@bufbuild/buf-linux-x64,1.66.0,https://www.npmjs.com/package/@bufbuild/buf-linux-x64/v/1.66.0
+@bufbuild/buf-linux-aarch64,1.66.0,https://www.npmjs.com/package/@bufbuild/buf-linux-aarch64/v/1.66.0
+@bufbuild/buf-linux-armv7,1.66.0,https://www.npmjs.com/package/@bufbuild/buf-linux-armv7/v/1.66.0
+@bufbuild/protoc-gen-es,2.11.0,https://www.npmjs.com/package/@bufbuild/protoc-gen-es/v/2.11.0
+@bufbuild/protoplugin,2.11.0,https://www.npmjs.com/package/@bufbuild/protoplugin/v/2.11.0
+@typescript/vfs,1.6.4,https://www.npmjs.com/package/@typescript/vfs/v/1.6.4
+debug,4.4.3,https://www.npmjs.com/package/debug/v/4.4.3
+ms,2.1.3,https://www.npmjs.com/package/ms/v/2.1.3
+typescript,5.4.5,https://www.npmjs.com/package/typescript/v/5.4.5
+milsymbol,3.0.3,https://www.npmjs.com/package/milsymbol/v/3.0.3

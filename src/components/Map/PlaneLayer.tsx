@@ -65,11 +65,14 @@ export function PlaneLayer() {
 
   useEffect(() => {
     const source = new VectorSource()
-    const layer = new VectorLayer({ source })
+    const layer = new VectorLayer({
+      source,
+      updateWhileInteracting: true,
+      updateWhileAnimating: true,
+    })
     map.addLayer(layer)
 
     const startTime = performance.now()
-    let rafId: number
 
     const trailStyles = configs.map(cfg => {
       const styles: Style[] = []
@@ -103,8 +106,8 @@ export function PlaneLayer() {
     }
     source.addFeatures(allFeatures)
 
-    const loop = (now: number) => {
-      const elapsed = (now - startTime) / 1000
+    const updatePositions = () => {
+      const elapsed = (performance.now() - startTime) / 1000
 
       for (let p = 0; p < configs.length; p++) {
         const cfg = configs[p]
@@ -129,13 +132,17 @@ export function PlaneLayer() {
         markerGeom.setCoordinates(fromLonLat([cur.lon, cur.lat]))
       }
 
-      rafId = requestAnimationFrame(loop)
+      // Request another OL render frame to keep the loop going
+      map.render()
     }
 
-    rafId = requestAnimationFrame(loop)
+    // Drive animation from OL's own render cycle so it stays
+    // in sync during interactions (drag, zoom, etc.)
+    map.on('postrender', updatePositions)
+    map.render() // kick off the first frame
 
     return () => {
-      cancelAnimationFrame(rafId)
+      map.un('postrender', updatePositions)
       map.removeLayer(layer)
     }
   }, [map, configs])

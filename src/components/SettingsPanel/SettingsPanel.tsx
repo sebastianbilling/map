@@ -11,7 +11,7 @@ interface SettingsPanelProps {
 export function SettingsPanel({ settings }: SettingsPanelProps) {
   return (
     <>
-      <Section title="Map">
+      <Section title="Map3">
         <Toggle label="Show labels" checked={settings.showLabels} onChange={() => settings.setShowLabels(!settings.showLabels)} />
         <Toggle label="Traffic layer" checked={settings.showTraffic} onChange={() => settings.setShowTraffic(!settings.showTraffic)} />
         <Toggle label="3D buildings" checked={settings.show3D} onChange={() => settings.setShow3D(!settings.show3D)} />

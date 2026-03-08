@@ -9,11 +9,16 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@bufbuild/protobuf": "^2.11.0",
+    "@connectrpc/connect": "^2.1.1",
+    "@connectrpc/connect-web": "^2.1.1",
     "milsymbol": "^3.0.3",
     "ol": "^10.7.0",
     "preact": "10.18.2"
   },
   "devDependencies": {
+    "@bufbuild/buf": "^1.66.0",
+    "@bufbuild/protoc-gen-es": "^2.11.0",
     "esbuild": "0.24.0",
     "typescript": "~5.9.3"
   }
