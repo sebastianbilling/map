@@ -1,4 +1,7 @@
 import { useLayerSettings, useMapSettings } from './hooks/useMapSettings'
+import { useTheme } from './hooks/useTheme'
+import { BottomBar } from './components/BottomBar/BottomBar'
+import { Header } from './components/Header/Header'
 import { LayersPanel } from './components/LayersPanel/LayersPanel'
 import { Map } from './components/Map/Map'
 import { PlaneLayer } from './components/Map/PlaneLayer'
@@ -10,19 +13,34 @@ import './App.css'
 function App() {
   const mapSettings = useMapSettings()
   const layerSettings = useLayerSettings()
+  const { theme, setTheme } = useTheme()
+
+  const panels = [
+    {
+      id: 'settings',
+      icon: '⚙',
+      title: 'Settings',
+      content: <SettingsPanel settings={mapSettings} />,
+    },
+    {
+      id: 'layers',
+      icon: '◉',
+      title: 'Layers',
+      content: <LayersPanel settings={layerSettings} />,
+    },
+  ]
 
   return (
     <div className="app">
-      <Sidebar side="left" title="Settings">
-        <SettingsPanel settings={mapSettings} />
-      </Sidebar>
-      <Sidebar side="right" title="Layers">
-        <LayersPanel settings={layerSettings} />
-      </Sidebar>
-      <Map opacity={mapSettings.mapOpacity / 100}>
-        <PlaneLayer />
-        <SectorLayer />
-      </Map>
+      {/* <Header theme={theme} onThemeChange={setTheme} /> */}
+      <div className="app-body">
+        {/* <Sidebar panels={panels} /> */ }
+        <Map opacity={mapSettings.mapOpacity / 100}>
+          <PlaneLayer />
+          <SectorLayer />
+        </Map>
+      </div>
+      {/* <BottomBar text="Tracking 100 aircraft — Last updated just now" /> */ }
     </div>
   )
 }

@@ -2,42 +2,59 @@ import { useState } from 'preact/hooks'
 import type { ComponentChildren } from 'preact'
 import './Sidebar.css'
 
-interface SidebarProps {
-  side: 'left' | 'right'
+interface PanelConfig {
+  id: string
+  icon: string
   title: string
-  children: ComponentChildren
+  content: ComponentChildren
 }
 
-export function Sidebar({ side, title, children }: SidebarProps) {
-  const [open, setOpen] = useState(false)
+interface SidebarProps {
+  panels: PanelConfig[]
+}
+
+export function Sidebar({ panels }: SidebarProps) {
+  const [activePanel, setActivePanel] = useState<string | null>(null)
+
+  const toggle = (id: string) => {
+    setActivePanel((prev) => (prev === id ? null : id))
+  }
+
+  const active = panels.find((p) => p.id === activePanel)
 
   return (
-    <>
-      <button
-        className={`sidebar-toggle sidebar-toggle-${side}`}
-        onClick={() => setOpen(true)}
-        aria-label={`Open ${title}`}
-      >
-        {side === 'left' ? '⚙' : '◉'}
-      </button>
-
-      {open && (
-        <div className="sidebar-backdrop" onClick={() => setOpen(false)} />
-      )}
-
-      <aside className={`sidebar sidebar-${side} ${open ? 'sidebar-open' : ''}`}>
-        <div className="sidebar-header">
-          <h2 className="sidebar-title">{title}</h2>
+    <div className="sidebar-container">
+      <nav className="icon-rail">
+        {panels.map((panel) => (
           <button
-            className="sidebar-close"
-            onClick={() => setOpen(false)}
-            aria-label={`Close ${title}`}
+            key={panel.id}
+            className={`rail-btn${activePanel === panel.id ? ' active' : ''}`}
+            onClick={() => toggle(panel.id)}
+            aria-label={panel.title}
+            title={panel.title}
           >
-            ✕
+            {panel.icon}
           </button>
-        </div>
-        {children}
-      </aside>
-    </>
+        ))}
+      </nav>
+
+      {active && (
+        <aside className="sidebar-panel">
+          <div className="sidebar-panel-header">
+            <h2 className="sidebar-panel-title">{active.title}</h2>
+            <button
+              className="sidebar-panel-close"
+              onClick={() => setActivePanel(null)}
+              aria-label="Close panel"
+            >
+              ✕
+            </button>
+          </div>
+          <div className="sidebar-panel-content">
+            {active.content}
+          </div>
+        </aside>
+      )}
+    </div>
   )
 }

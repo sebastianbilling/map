@@ -88,8 +88,8 @@ export function SectorLayer() {
 
   useEffect(() => {
     // Mutable sector state
-    let centerLon = 11.97
-    let centerLat = 57.7
+    let centerLon = -0.1276
+    let centerLat = 51.5074
     let rangeKm = 100
     let fovDeg = 90
     let bearing = 0

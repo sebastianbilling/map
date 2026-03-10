@@ -37,7 +37,7 @@ export function Map({ children, opacity = 1 }: MapProps) {
       target: containerRef.current,
       layers: [tileLayer],
       view: new View({
-        center: fromLonLat([11.97, 57.7]),
+        center: fromLonLat([-0.1276, 51.5074]),
         zoom: 13,
       }),
     })
