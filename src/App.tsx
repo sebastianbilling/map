@@ -13,7 +13,7 @@ import './App.css'
 function App() {
   const mapSettings = useMapSettings()
   const layerSettings = useLayerSettings()
-  const { theme, setTheme } = useTheme()
+  //const { theme, setTheme } = useTheme()
 
   const panels = [
     {
